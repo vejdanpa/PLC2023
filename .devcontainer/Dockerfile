@@ -19,8 +19,11 @@ ARG NODE_VERSION="lts/*"
 RUN if [ "${INSTALL_NODE}" = "true" ]; then su vscode -c "source /usr/local/share/nvm/nvm.sh && nvm install ${NODE_VERSION} 2>&1"; fi
 
 # [Optional] Uncomment this section to install additional OS packages.
-RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
-    && apt-get -y install --no-install-recommends build-essential ghc gnat clisp openjdk-11-jdk swi-prolog python g++ libghc-stm-dev golang-go 
+RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+#updating yarn key as per https://github.com/yarnpkg/yarn/issues/6865#issuecomment-772047314
+RUN apt-get update
+#&& export #DEBIAN_FRONTEND=noninteractive \ #commenting this out as unsure of purpose
+RUN apt-get -y install --no-install-recommends build-essential ghc gnat clisp openjdk-11-jdk swi-prolog python g++ libghc-stm-dev golang-go
 
 # [Optional] Uncomment this line to install global node packages.
 # RUN su vscode -c "source /usr/local/share/nvm/nvm.sh && npm install -g <your-package-here>" 2>&1

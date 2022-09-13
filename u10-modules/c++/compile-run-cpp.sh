@@ -1,1 +1,0 @@
-../../scripts/compile-run-cpp.sh
